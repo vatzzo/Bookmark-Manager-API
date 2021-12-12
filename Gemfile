@@ -5,6 +5,7 @@ ruby "3.0.3"
 
 gem "bcrypt", "~> 3.1.13"
 gem "dotenv-rails", "~> 2.7", ">= 2.7.6"
+gem "jwt"
 gem "pg", "~> 1.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
