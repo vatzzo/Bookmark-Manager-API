@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :folders
+  has_many :folder_items, through: :folders
 
   validates :login, presence: true, length: { in: 6..20 }, uniqueness: { case_sensitive: true },
                     format: { with: /[\w]*/, message: "only letters and numbers are allowed." }
