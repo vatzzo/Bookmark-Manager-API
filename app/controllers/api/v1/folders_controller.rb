@@ -2,8 +2,7 @@ module Api
   module V1
     class FoldersController < ApplicationController
       def index
-        # TODO: add folders namespace to the beggining of the response
-        render json: folders, each_serializer: FolderSerializer, status: :ok
+        render json: folders, status: :ok
       end
 
       private
