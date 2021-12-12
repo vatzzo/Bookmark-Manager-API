@@ -23,37 +23,57 @@ RSpec.describe "Users API", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    context "invalid password" do
+    context "failure" do
+      let(:expected_error) do
+        {
+          "error" => "user_not_created",
+          "status" => 422,
+          "message" => kind_of(Array)
+        }
+      end
+
       context "password does not contain any special characters" do
         let(:password) { "Password" }
 
-        it "should raise an error" do
-          expect { call_endpoint }.to raise_error
+        it "results in error" do
+          call_endpoint
+          expect(json_response).to include(expected_error)
+          expect(json_response["message"][0])
+            .to eq("Password  must contain at least one special character")
         end
       end
 
       context "password does not contain any big letter" do
         before { password.downcase! }
 
-        it "should raise an error" do
-          expect { call_endpoint }.to raise_error
+        it "results in error" do
+          call_endpoint
+          expect(json_response).to include(expected_error)
+          expect(json_response["message"][0])
+            .to eq("Password  must contain at least one uppercase letter")
         end
       end
-    end
 
-    context "wrong email is provided" do
-      let(:email) { "wrong-email" }
+      context "wrong email is provided" do
+        let(:email) { "wrong-email" }
 
-      it "should raise an error" do
-        expect { call_endpoint }.to raise_error
+        it "results in error" do
+          call_endpoint
+          expect(json_response).to include(expected_error)
+          expect(json_response["message"][0])
+            .to eq("Email wrong email address.")
+        end
       end
-    end
 
-    context "wrong login is provided" do
-      let(:login) { "short" }
+      context "wrong login is provided" do
+        let(:login) { "short" }
 
-      it "should raise an error" do
-        expect { call_endpoint }.to raise_error
+        it "results in error" do
+          call_endpoint
+          expect(json_response).to include(expected_error)
+          expect(json_response["message"][0])
+            .to eq("Login is too short (minimum is 6 characters)")
+        end
       end
     end
   end

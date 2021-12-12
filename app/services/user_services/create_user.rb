@@ -9,7 +9,10 @@ module UserServices
     attr_reader :email, :login, :password
 
     def call
-      User.create!(email: email, login: login, password: password)
+      user = User.new(email: email, login: login, password: password)
+      raise Errors::UserNotCreated, user.errors.full_messages unless user.valid?
+
+      user.save
     end
   end
 end
