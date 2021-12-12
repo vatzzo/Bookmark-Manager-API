@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthenticationController < ApplicationController
       def login
-        token = AuthenticationServices::Authenticator.call(
+        token = AuthServices::Authenticator.call(
           login: auth_params[:login],
           password: auth_params[:password]
         )

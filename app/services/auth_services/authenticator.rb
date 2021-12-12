@@ -1,4 +1,4 @@
-module AuthenticationServices
+module AuthServices
   class Authenticator < ApplicationService
     def initialize(login:, password:)
       @login = login
@@ -8,7 +8,7 @@ module AuthenticationServices
     attr_reader :login, :password
 
     def call
-      raise AuthenticationServices::Errors::InvalidPassword unless user
+      raise AuthServices::Errors::InvalidPassword unless user
 
       JWT.encode payload, secret
     end

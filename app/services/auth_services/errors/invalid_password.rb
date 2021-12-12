@@ -1,4 +1,4 @@
-module AuthenticationServices
+module AuthServices
   module Errors
     class InvalidPassword < BaseError
       def initialize
