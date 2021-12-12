@@ -5,6 +5,7 @@ module AuthServices
     end
 
     def call
+      raise Errors::InvalidToken unless user
       user
     end
 
@@ -13,8 +14,7 @@ module AuthServices
     attr_reader :headers
 
     def user
-      @user ||= User.find_by(login: decoded_auth_token[:login]) if decoded_auth_token
-      raise Errors::InvalidToken unless @user
+      @user ||= User.find_by(login: decoded_auth_token[:login]) if decoded_auth_token.present?
     end
 
     def decoded_auth_token

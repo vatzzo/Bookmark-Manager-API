@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       post "auth/logout", to: "authentication#logout"
 
       resources :users, only: [:create]
+      resources :folders
+      resources :folder_items
     end
   end
 end

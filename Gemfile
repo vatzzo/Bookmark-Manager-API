@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.3"
 
+gem 'active_model_serializers'
 gem "bcrypt", "~> 3.1.13"
 gem "dotenv-rails", "~> 2.7", ">= 2.7.6"
 gem "jwt"
