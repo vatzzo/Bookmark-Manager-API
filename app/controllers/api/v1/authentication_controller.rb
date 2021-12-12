@@ -1,6 +1,8 @@
 module Api
   module V1
     class AuthenticationController < ApplicationController
+      skip_before_action :authenticate_request, only: :login
+
       def login
         token = AuthServices::Authenticator.call(
           login: auth_params[:login],
