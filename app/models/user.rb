@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :folders
+
   validates :login, presence: true, length: { in: 6..20 }, uniqueness: { case_sensitive: true },
                     format: { with: /[\w]*/, message: "only letters and numbers are allowed." }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
